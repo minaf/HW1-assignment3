@@ -17,7 +17,6 @@ data_dir = 'Datasets/'
 # read in the dataset
 print('reading in the CIFAR10 dataset')
 dataset = cifar10_read.read_data_sets(data_dir, one_hot=True, reshape=True)
-
 using_tensorboard = True
 
 ##################################################
@@ -88,6 +87,8 @@ if using_tensorboard:
 
 n_iter = 10000
 nbatch = 200
+
+#saving training and validation data at specific folders
 name_at = 'network1/accuracy/training/net1_t('+str(learning_rate)+','+str(nbatch)+str(n_iter)+').csv'
 myfile_at = open(name_at,'w')
 name_av = 'network1/accuracy/validation/net1_v('+str(learning_rate)+','+str(nbatch)+str(n_iter)+').csv'
@@ -143,7 +144,8 @@ with tf.Session() as sess:
             val = sess.run([cross_entropy, accuracy], feed_dict={x_input:dataset.validation.images, y_:dataset.validation.labels})
 
             info = [i] + tr + val
-            #print(info)
+
+            #writing results of each iteration to files
             myfile_at.write(str(i)+','+str(tr[1])+'\n')
             myfile_lt.write(str(i)+','+str(tr[0])+'\n')
             myfile_av.write(str(i)+','+str(val[1])+'\n')
@@ -165,7 +167,11 @@ with tf.Session() as sess:
     test_acc = sess.run(accuracy, feed_dict={x_input: dataset.test.images, y_: dataset.test.labels})
     final_msg = 'test accuracy:' + str(test_acc)
     print(final_msg)
+
+    #print execution time
     print("--- %s seconds ---" % (time.time() - start_time))
+
+    #closing all open files for writing
     myfile_at.close()
     myfile_lt.close()
     myfile_av.close()
