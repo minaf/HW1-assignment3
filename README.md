@@ -1,4 +1,4 @@
-# Neural network exercise to predict digits
+# Neural network for image classification
 
 ## Files
 - network1.py - using one hidden layer. Different values of paramters learning rate, batch size and iteration number is checked using this code 
