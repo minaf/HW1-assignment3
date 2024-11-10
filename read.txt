@@ -1,4 +1,0 @@
-Code
-network1.py - using one hidden layer. Different values of paramters learning rate, batch size and iteration number is checked using this code (Exercise 2)
-network2.py - using two hidden layers. Defined momentum to speed up training. (Exercise 3)
-network3.py - using convolutional layer and two hidden layers.  (Exercise 4)
